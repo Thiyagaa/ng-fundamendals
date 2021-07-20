@@ -14,10 +14,17 @@ export class EventThumbnailComponent implements OnInit {
   }
   @Input() event:any
 
+  /*
+  //passing data between components
+  
   @Output() eventEmitter = new EventEmitter();
 
   handleClickEvent =  () =>{
       this.eventEmitter.emit(this.event.name)
       console.log("Clicked !!!!")
   }
+
+  */
+  someVariable: any = "variable 'someVariable' accessed"
+  fooHandler = () => {console.log("foo")}
 }

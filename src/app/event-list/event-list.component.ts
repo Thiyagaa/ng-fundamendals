@@ -25,7 +25,12 @@ export class EventListComponent implements OnInit {
     }
   }
 
+/*
+
+  //passing data between components
+  
   handleChildClick (data: any){
       console.log("Received "+data)
-  }  
+  }
+*/  
 }

@@ -1,4 +1,8 @@
 <div>
     <h1>Upcomming events</h1>
-    <app-event-thumbnail (eventEmitter)= "handleChildClick($event)"  [event]="eventlist"></app-event-thumbnail>
+        <!--passing data between components-->
+        <!-- <app-event-thumbnail (eventEmitter)= "handleChildClick($event)"  [event]="eventlist"></app-event-thumbnail> -->
+        <app-event-thumbnail #thumbnail  [event]="eventlist"></app-event-thumbnail>
+        <h3>{{thumbnail.someVariable}}</h3>
+        <button class="btn-primary" (click)="thumbnail.fooHandler()">Foo me</button>
 </div>
