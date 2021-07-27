@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+/* REFER : https://www.techiediaries.com/angular-bootstrap/ */
+
+body {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-top: 1rem;
+}
+
