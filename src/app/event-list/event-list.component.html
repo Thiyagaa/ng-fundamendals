@@ -1,4 +1,4 @@
-<div>
+<div class="container">
         <!--passing data between components-->
         <!-- <app-event-thumbnail (eventEmitter)= "handleChildClick($event)"  [event]="eventlist"></app-event-thumbnail> -->
         <!--
@@ -9,8 +9,8 @@
         <button class="btn-primary" (click)="thumbnail.fooHandler()">Foo me</button>
         -->
         <div class="row">
-                <div class="col-md-5">
-        <app-event-thumbnail class="event-thumbnail" *ngFor="let event of eventlist" [event]="event"></app-event-thumbnail>
-        </div>
+                <div class="col-md-6 event-thumbnail" *ngFor="let event of eventlist">
+                        <app-event-thumbnail class="well" [event]="event"></app-event-thumbnail>
+                </div>
         </div>
 </div>

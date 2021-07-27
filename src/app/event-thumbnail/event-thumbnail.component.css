@@ -3,4 +3,21 @@
     padding-right: 1.5rem;
     margin: 1rem;
     background-color: papayawhip;
+    height: 12rem;
+}
+.adventure{
+    color: red;
+}
+.leisure{
+    color:darkgreen;
+}
+.educational{
+    color:cadetblue;
+}
+.miscellaneous{
+    color: brown;
+}
+
+.bold{
+    font-weight: bold ;
 }

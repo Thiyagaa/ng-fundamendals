@@ -33,4 +33,23 @@ export class EventThumbnailComponent implements OnInit {
   fooHandler = () => {console.log("foo")}
   
   */
+
+  getEventTypeStyles(){
+    const isLeisure =  this.event?.eventType === 'Leisure'
+    return {leisure:isLeisure,bold:isLeisure}
+  }
+
+  getEventTypeClassAsString(){
+    if(this.event?.eventType === 'Educational'){
+      return "educational bold"
+    }
+    return ""
+  }
+
+  getEventTypeClassAsStringArray(){
+    if(this.event?.eventType === 'Educational'){
+      return ['educational','bold']
+    }
+    return []
+  }
 }
