@@ -25,6 +25,12 @@ export class EventThumbnailComponent implements OnInit {
   }
 
   */
+
+  /*
+  //passing data between components with template variables
+  
   someVariable: any = "variable 'someVariable' accessed"
   fooHandler = () => {console.log("foo")}
+  
+  */
 }

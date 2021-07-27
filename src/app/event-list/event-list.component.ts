@@ -11,7 +11,7 @@ export class EventListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  eventlist = {
+  eventlist = [{
     "id": 1,
     "name" : "Leh-Ladak Bike trip",
     "date" : "8-August-2021",
@@ -23,7 +23,20 @@ export class EventListComponent implements OnInit {
       "country": "India",
       "province": "Ladakh"
     }
+  },{
+    "id": 2,
+    "name" : "Andaman Couple trip",
+    "date" : "3-March-2021",
+    "time" : "8.00 am",
+    "price" : 25000,
+    "location": {
+      "address": "1 South Andaman Market",
+      "city" : "Andaman and Nicobar",
+      "country": "India",
+      "province": "South Andaman"
+    }
   }
+]
 
 /*
 
