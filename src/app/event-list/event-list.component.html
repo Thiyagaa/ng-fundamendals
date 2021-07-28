@@ -10,7 +10,7 @@
         -->
         <div class="row">
                 <div class="col-md-6 event-thumbnail" *ngFor="let event of eventlist">
-                        <app-event-thumbnail class="well" [event]="event"></app-event-thumbnail>
+                        <app-event-thumbnail (click)="handleEventClickEvent(event.name)" class="well" [event]="event"></app-event-thumbnail>
                 </div>
         </div>
 </div>
