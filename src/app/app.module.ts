@@ -27,7 +27,19 @@ import { EventRouteActivator } from './service/event-route-activator.service';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [EventService,ToastrService,EventRouteActivator],
+  providers: [
+    EventService,
+    ToastrService,
+    EventRouteActivator,
+    {provide: 'canDeactivateCreateEvent',useValue : checkDirtyState}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function checkDirtyState(component : CreateEventComponent){
+  if(component.isDirty){
+    return window.confirm('There are unsaved changes, do you want to proceed?')
+  }
+  return true;
+}

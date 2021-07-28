@@ -13,6 +13,8 @@ export class CreateEventComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isDirty: boolean = true
+
   cancel(){
       this.router.navigate(['/events'])
   }
