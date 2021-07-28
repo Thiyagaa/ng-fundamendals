@@ -1,0 +1,26 @@
+<div class="well hoverwell thumbnail event-thumbnail shadow-sm align-items-center">
+    <h2>{{event?.name}}</h2>
+    <div>Date : {{event?.date}} </div>
+    <div>Time : {{event?.time}} </div>
+    <div>Price: ${{event?.price}} </div>
+    <div *ngIf="event?.location">
+        <span> Location : {{event?.location?.address}} </span>
+        <span>&nbsp;</span>
+        <span class="pad-left">{{event?.location?.city}},{{event?.location?.country}}</span>
+    </div>
+    <div *ngIf="event?.onlineUrl">
+        <span> Online Url : {{event?.onlineUrl}}</span>
+    </div>
+    <div *ngIf="event?.eventType">
+        <div [ngSwitch]="event?.eventType">
+            <span>Category : </span>
+            <span [class.adventure]="event?.eventType === 'Adventure'" *ngSwitchCase="'Adventure'">ADVENTURE</span>
+            <span [ngClass]="{educational:event?.eventType === 'Educational',bold:event?.eventType === 'Educational'}" *ngSwitchCase="'Educational'">EDUCATIONAL</span>
+            <span [class]="getEventTypeStyles()" *ngSwitchCase="'Leisure'">LEISURE</span>
+            <span [class.miscellaneous]="event?.eventType !== undefined" *ngSwitchDefault>MISCELLANEOUS</span>
+        </div>
+        <span [hidden]='event?.eventType !== "Adventure"'>Difficulty : {{event?.difficulty}}</span>
+    </div>
+    <!--passing data between components-->
+    <!-- <button class="btn btn-primary" (click)="handleClickEvent()" >Click !!!</button> -->
+</div>

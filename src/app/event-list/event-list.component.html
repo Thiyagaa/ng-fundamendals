@@ -1,0 +1,16 @@
+<div class="container">
+        <!--passing data between components-->
+        <!-- <app-event-thumbnail (eventEmitter)= "handleChildClick($event)"  [event]="eventlist"></app-event-thumbnail> -->
+        <!--
+        //data transfer between components with template variables
+        <app-event-thumbnail #thumbnail  [event]="eventlist"></app-event-thumbnail>
+        <h3>{{thumbnail.someVariable}}</h3>
+        
+        <button class="btn-primary" (click)="thumbnail.fooHandler()">Foo me</button>
+        -->
+        <div class="row">
+                <div class="col-md-6 event-thumbnail" *ngFor="let event of eventlist">
+                        <app-event-thumbnail (click)="handleEventClickEvent(event.name)" class="well" [event]="event"></app-event-thumbnail>
+                </div>
+        </div>
+</div>
