@@ -14,6 +14,7 @@ import { NotfoundComponent } from './errors/notfound/notfound.component';
 import { EventRouteActivator } from './service/event-route-activator.service';
 import { EventListResolverService } from './service/event-list-resolver.service';
 import { UserModule } from './user/user.module';
+import { AuthService } from './user/auth.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UserModule } from './user/user.module';
     ToastrService,
     EventRouteActivator,
     {provide: 'canDeactivateCreateEvent',useValue : checkDirtyState},
-    EventListResolverService
+    EventListResolverService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
