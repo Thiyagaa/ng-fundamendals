@@ -12,6 +12,8 @@ import { AppRoutingModule } from './routing.module';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { NotfoundComponent } from './errors/notfound/notfound.component';
 import { EventRouteActivator } from './service/event-route-activator.service';
+import { EventListResolverService } from './service/event-list-resolver.service';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -25,13 +27,15 @@ import { EventRouteActivator } from './service/event-route-activator.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    UserModule
   ],
   providers: [
     EventService,
     ToastrService,
     EventRouteActivator,
-    {provide: 'canDeactivateCreateEvent',useValue : checkDirtyState}
+    {provide: 'canDeactivateCreateEvent',useValue : checkDirtyState},
+    EventListResolverService
   ],
   bootstrap: [AppComponent]
 })

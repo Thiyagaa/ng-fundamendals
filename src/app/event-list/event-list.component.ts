@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../service/event.service';
 import { ToastrService } from '../service/toastr.service';
 
@@ -8,10 +9,13 @@ import { ToastrService } from '../service/toastr.service';
 })
 export class EventListComponent implements OnInit {
 
-  constructor(private eventService:EventService,private toastr:ToastrService) { }
+  constructor(private eventService:EventService,private toastr:ToastrService,private route:ActivatedRoute) { }
   @Input() eventlist:any
   ngOnInit(): void {
-    this.eventlist = this.eventService.getEvents();
+    //console.log(JSON.stringify(this.route.snapshot))
+    this.eventlist= this.route.snapshot.data['events']
+    // this below line is not needed as we have the resolver taking care of this issue 
+    //this.eventService.getEvents().subscribe(events => {this.eventlist = events});
   }
   
   handleEventClickEvent(eventName:string){
