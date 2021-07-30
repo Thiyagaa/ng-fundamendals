@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   userName:string=''
   password:string=''
+  mouseOverLogin:boolean= false
   constructor(private authService:AuthService, private router:Router) { }
 
   ngOnInit(): void {
@@ -23,5 +24,8 @@ export class LoginComponent implements OnInit {
 
   cancel(){
     this.router.navigate(['/events'])
+  }
+  stringify(value:any){
+    console.log(JSON.stringify(value));
   }
 }

@@ -1,8 +1,9 @@
 export interface EventBase {
     id: number,
     name:string,
+    subject?:string,
     date : Date,
-    time :  string,
+    time : string,
     price : number,
     imageUrl?: string,
     location? : {

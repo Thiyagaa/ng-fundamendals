@@ -57,6 +57,7 @@ const EVENTS:EventBase[] = [{
   },{
     "id": 3,
     "name" : "TNPSC online class",
+        "subject":"Science",
     "date" : new Date("11-November-2021"),
     "time" : "7.00 pm",
     "price" : 0,
@@ -65,6 +66,7 @@ const EVENTS:EventBase[] = [{
   },{
     "id": 4,
     "name" : "TNPSC online class",
+        "subject":"Social",
     "date" : new Date("11-November-2021"),
     "time" : "7.00 pm",
     "price" : 0,
@@ -73,6 +75,7 @@ const EVENTS:EventBase[] = [{
   },{
     "id": 5,
     "name" : "TNPSC online class",
+    "subject":"English",
     "date" : new Date("11-November-2021"),
     "time" : "7.00 pm",
     "price" : 0,
@@ -81,6 +84,7 @@ const EVENTS:EventBase[] = [{
   },{
     "id": 6,
     "name" : "TNPSC online class",
+        "subject":"Tamil",
     "date" : new Date("11-November-2021"),
     "time" : "7.00 pm",
     "price" : 0,
@@ -89,6 +93,7 @@ const EVENTS:EventBase[] = [{
   },{
     "id": 7,
     "name" : "TNPSC online class",
+        "subject":"Mathematics",
     "date" : new Date("11-November-2021"),
     "time" : "7.00 pm",
     "price" : 0,
