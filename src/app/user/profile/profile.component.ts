@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'src/app/service/toastr.service';
 import { AuthService } from '../auth.service';
@@ -13,15 +13,17 @@ export class ProfileComponent implements OnInit {
 
   //REFER : https://stackoverflow.com/questions/66563535/type-formgroup-null-is-not-assignable-to-type-formgroup-type-null-is-no
   profileForm!: FormGroup; 
-
+  firstName!: FormControl
+  lastName!: FormControl
+  
   constructor(private router: Router,private authService:AuthService,private toastr:ToastrService) { }
 
   ngOnInit(): void {
-    let firstName = new FormControl(this.authService.loggedOnUser?.firstName)
-    let lastName = new FormControl(this.authService.loggedOnUser?.lastName)
+    this.firstName = new FormControl(this.authService.loggedOnUser?.firstName,[Validators.required,Validators.pattern('[A-Za-z0-9].*')])
+    this.lastName = new FormControl(this.authService.loggedOnUser?.lastName,[Validators.required,Validators.pattern('[A-Za-z0-9].*')])
     this.profileForm = new FormGroup({
-        firstName:firstName,
-        lastName:lastName
+        firstName:this.firstName,
+        lastName:this.lastName
     })
   }
 
@@ -30,9 +32,22 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(values:any){
-    this.authService.updateUser(values)
-    this.toastr.success("Updated the profile successfully")
-    this.router.navigate(['/events'])
+    if(this.profileForm.valid){
+      this.authService.updateUser(values)
+      this.toastr.success("Updated the profile successfully")
+      this.router.navigate(['/events'])
+    } 
+  }
+
+  validate(value : string){
+    switch(value){
+      case 'firstName':
+        return this.firstName.untouched || this.firstName.valid
+      case 'lastName':
+        return this.lastName.untouched || this.lastName.valid
+      default:
+        return false;
+    }
   }
 
 }
