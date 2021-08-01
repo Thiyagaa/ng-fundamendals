@@ -23,6 +23,13 @@ export class EventService {
   getEvent(id: number) : EventBase{
     return<EventBase> EVENTS.find(m=> m.id === id)
   }
+
+  addNewEvent(values: EventBase) {
+    values.id = EVENTS.length+1;
+    EVENTS.push(values)
+  }
+
+
 }
 
 const EVENTS:EventBase[] = [{

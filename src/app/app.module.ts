@@ -15,6 +15,8 @@ import { EventRouteActivator } from './service/event-route-activator.service';
 import { EventListResolverService } from './service/event-list-resolver.service';
 import { UserModule } from './user/user.module';
 import { AuthService } from './user/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatepickerModule } from 'ng2-datepicker';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,10 @@ import { AuthService } from './user/auth.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UserModule
+    UserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DatepickerModule 
   ],
   providers: [
     EventService,
