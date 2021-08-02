@@ -17,6 +17,8 @@ import { UserModule } from './user/user.module';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatepickerModule } from 'ng2-datepicker';
+import { SessionComponent } from './event/session/session.component';
+import { CreateSessionComponent } from './event/create-session/create-session.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { DatepickerModule } from 'ng2-datepicker';
     NavbarComponent,
     EventDetailsComponent,
     CreateEventComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    SessionComponent,
+    CreateSessionComponent
   ],
   imports: [
     BrowserModule,

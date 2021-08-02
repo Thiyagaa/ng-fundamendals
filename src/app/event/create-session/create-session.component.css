@@ -1,5 +1,5 @@
 em {float: right; color: red;}
-.error input {background-color: rgb(255, 212, 212);}
+.error input,.error select,.error textarea {background-color: rgb(255, 212, 212);}
 .error ::-webkit-input-placeholder {color:rgb(255, 212, 212);}
 .error ::-moz-placeholder {color:rgb(255, 212, 212);}
 .error :-moz-placeholder {color:rgb(255, 212, 212);}
