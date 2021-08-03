@@ -17,7 +17,6 @@ import { UserModule } from './user/user.module';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatepickerModule } from 'ng2-datepicker';
-import { SessionComponent } from './event/session/session.component';
 import { CreateSessionComponent } from './event/create-session/create-session.component';
 import { SessionListComponent } from './event/session-list/session-list.component';
 import { CollapsableWellComponent } from './common/collapsable-well/collapsable-well.component';
@@ -31,7 +30,6 @@ import { CollapsableWellComponent } from './common/collapsable-well/collapsable-
     EventDetailsComponent,
     CreateEventComponent,
     NotfoundComponent,
-    SessionComponent,
     CreateSessionComponent,
     SessionListComponent,
     CollapsableWellComponent
