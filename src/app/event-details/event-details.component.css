@@ -4,3 +4,4 @@ em {float: right; color: red;}
 .error ::-moz-placeholder {color:rgb(255, 212, 212);}
 .error :-moz-placeholder {color:rgb(255, 212, 212);}
 .error :-ms-input-placeholder{color:rgb(255, 212, 212);}
+a {cursor: pointer;}

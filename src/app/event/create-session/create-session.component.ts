@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SessionBase } from 'src/app/model/event-base';
 import { restrictedWords } from 'src/app/service/app.validators.service';
@@ -16,6 +16,10 @@ export class CreateSessionComponent implements OnInit {
   level!: FormControl;
   abstract!: FormControl;
   newSessionForm!: FormGroup;
+
+  @Output() saveEmitter = new EventEmitter()
+
+  @Output() cancelEmitter = new EventEmitter()
 
   constructor() { }
 
@@ -36,22 +40,28 @@ export class CreateSessionComponent implements OnInit {
   }
 
   saveSession(values: any){
-      let session : SessionBase= {
-        id: 1,
-        abstract : values.abstract,
-        duration : +values.duration,
-        level : values.level,
-        name : values.name,
-        presenter: values.presenter
-      }
-      
-      console.log(session)
+    let session : SessionBase= {
+      id: 1,
+      abstract : values.abstract,
+      duration : +values.duration,
+      level : values.level,
+      name : values.name,
+      presenter: values.presenter
+    }
+    
+    console.log("in save session")
+
+    this.saveEmitter.emit(session)
   }
 
   print(values:any){
 
     console.log(JSON.stringify(values));
     
+  }
+
+  cancel(){
+    this.cancelEmitter.emit(false)
   }
 
   
