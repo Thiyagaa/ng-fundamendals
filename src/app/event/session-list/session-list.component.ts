@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SessionBase } from 'src/app/model/event-base';
+import { faFireAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-session-list',
@@ -14,5 +15,5 @@ export class SessionListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  faFire = faFireAlt;
 }

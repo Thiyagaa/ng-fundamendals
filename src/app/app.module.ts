@@ -20,6 +20,7 @@ import { DatepickerModule } from 'ng2-datepicker';
 import { CreateSessionComponent } from './event/create-session/create-session.component';
 import { SessionListComponent } from './event/session-list/session-list.component';
 import { CollapsableWellComponent } from './common/collapsable-well/collapsable-well.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CollapsableWellComponent } from './common/collapsable-well/collapsable-
     UserModule,
     FormsModule,
     ReactiveFormsModule,
-    DatepickerModule 
+    DatepickerModule,
+    FontAwesomeModule
   ],
   providers: [
     EventService,
