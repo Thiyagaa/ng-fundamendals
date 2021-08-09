@@ -21,6 +21,7 @@ import { CreateSessionComponent } from './event/create-session/create-session.co
 import { SessionListComponent } from './event/session-list/session-list.component';
 import { CollapsableWellComponent } from './common/collapsable-well/collapsable-well.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DurationPipe } from './common/duration.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NotfoundComponent,
     CreateSessionComponent,
     SessionListComponent,
-    CollapsableWellComponent
+    CollapsableWellComponent,
+    DurationPipe
   ],
   imports: [
     BrowserModule,

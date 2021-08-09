@@ -16,6 +16,8 @@ export class EventDetailsComponent implements OnInit {
   
   event : any
   addMode: boolean 
+  filterBy:string = 'all';
+  sortBy:string = 'default';
   
   ngOnInit(): void {
     //+ will cast the string to number
