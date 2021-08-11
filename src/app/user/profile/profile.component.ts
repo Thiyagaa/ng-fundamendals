@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'src/app/service/toastr.service';
+import { Toastr, TOASTR_TOKEN } from 'src/app/service/toastr.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   firstName!: FormControl
   lastName!: FormControl
   
-  constructor(private router: Router,private authService:AuthService,private toastr:ToastrService) { }
+  constructor(private router: Router,private authService:AuthService,@Inject(TOASTR_TOKEN) private toastr:Toastr) { }
 
   ngOnInit(): void {
     this.firstName = new FormControl(this.authService.loggedOnUser?.firstName,[Validators.required,Validators.pattern('[A-Za-z0-9].*')])
