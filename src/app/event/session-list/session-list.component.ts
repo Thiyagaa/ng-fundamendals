@@ -23,7 +23,7 @@ export class SessionListComponent implements OnInit,OnChanges {
   }
   sortSessions(sortBy: string) {
     if(sortBy === 'name'){
-      this.visibleSessions.sort((a,b)=>   (a.name > b.name ? -1 : 1))
+      this.visibleSessions.sort((a,b)=>   (a.title > b.title ? -1 : 1))
     } else if (sortBy === 'votes'){
       this.visibleSessions.sort((a,b)=> {
         if((a.voters && b.voters)){

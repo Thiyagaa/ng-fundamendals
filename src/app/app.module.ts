@@ -1,3 +1,4 @@
+/// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -22,8 +23,14 @@ import { SessionListComponent } from './event/session-list/session-list.componen
 import { CollapsableWellComponent } from './common/collapsable-well/collapsable-well.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DurationPipe } from './common/duration.pipe';
+import { SimpleModalComponent } from './common/simple-modal/simple-modal.component';
+import { JQUERY_TOKEN } from './service/jquery.service.service';
+import { ModalTriggerDirective } from './common/directive/modal.trigger.directive';
 
-declare let toastr:Toastr;
+let $: JQueryStatic = (window as any)["jQuery"];
+let toastr: Toastr = (window as any)["toastr"];
+
+//declare let toastr:Toastr;
 
 @NgModule({
   declarations: [
@@ -37,7 +44,9 @@ declare let toastr:Toastr;
     CreateSessionComponent,
     SessionListComponent,
     CollapsableWellComponent,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   imports: [
     BrowserModule,
@@ -77,7 +86,8 @@ declare let toastr:Toastr;
     
     */
     EventListResolverService,
-    AuthService
+    AuthService,
+    {provide: JQUERY_TOKEN,useValue:$},
   ],
   bootstrap: [AppComponent]
 })

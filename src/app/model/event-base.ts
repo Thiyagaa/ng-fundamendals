@@ -19,8 +19,13 @@ export interface EventBase {
 
 }
 
-export interface ItenaryBase{
-    day: number,
+export  interface ISchedule{
+    id: number,
+    eventId?:number,
+    title: string
+}
+
+export interface ItenaryBase extends ISchedule{
     planed: string[],
     destination: string,
     source: string,
@@ -29,9 +34,7 @@ export interface ItenaryBase{
     distance:number
 }
 
-export interface SessionBase{
-    id: number,
-    name: string,
+export interface SessionBase extends ISchedule{
     presenter: string,
     duration: number,
     level: string,

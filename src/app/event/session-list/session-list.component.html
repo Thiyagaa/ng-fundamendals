@@ -2,7 +2,7 @@
   <div class="col-md-10">
     <app-collapsable-well>
         <div well-title>
-            {{session.name}}
+            {{session.title}}
             <fa-icon *ngIf="(session.voters && (session.voters.length > 3))" style="color: #ff9900;" [icon]="faFire"></fa-icon> 
         </div>
         <div well-body>
