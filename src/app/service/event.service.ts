@@ -1,11 +1,44 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { EventBase } from '../model/event-base';
+import { EventBase,ISchedule } from '../model/event-base';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
+  findSessionsByNameContaining(param: string) {
+      let term:string = param.toLocaleLowerCase();
+      let results:any = []; 
+      EVENTS.forEach(event=> {
+        //console.log("Event "+ event.name)
+        if(event.itenary){
+          //console.log("has sessions "+ event.itenary)
+          let values:any[] = event.itenary;
+
+          let sessionslst = values
+                            .filter((session: any) => { 
+            //                  console.log( "session" + JSON.stringify(session) )
+            //                  console.log( "is true "+ ((session as unknown as ISchedule).title.toLowerCase().indexOf(term) > -1))
+                              return (session as unknown as ISchedule).title.toLowerCase().indexOf(term) > -1
+                            })
+          //console.log("matched sessions "+JSON.stringify(sessionslst))
+          sessionslst = sessionslst.map((session:any) => {
+            session.eventId = event.id;
+            //console.log("Assigining session id")
+            return session;
+          })
+          results = results.concat(sessionslst)
+        }
+      })
+      //console.log(JSON.stringify(results))
+      var searchEmitter = new EventEmitter(true);
+
+      setTimeout(()=>{
+        searchEmitter.emit(results)
+      },100)
+      
+      return searchEmitter;
+  }
   
   
   updateEvent(event: EventBase) {
@@ -148,7 +181,7 @@ const EVENTS:EventBase[] = [{
       itenary: [
         {
           id: 1,
-          name: "Using Angular 4 Pipes",
+          title: "Using Angular 4 Pipes",
           presenter: "Peter Bacon Darwin",
           duration: 1,
           level: "Intermediate",
@@ -160,7 +193,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 2,
-          name: "Getting the most out of your dev team",
+          title: "Getting the most out of your dev team",
           presenter: "Jeff Cross",
           duration: 1,
           level: "Intermediate",
@@ -172,7 +205,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 3,
-          name: "Angular 4 Performance Metrics",
+          title: "Angular 4 Performance Metrics",
           presenter: "Rob Wormald",
           duration: 2,
           level: "Advanced",
@@ -185,7 +218,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 4,
-          name: "Angular 5 Look Ahead",
+          title: "Angular 5 Look Ahead",
           presenter: "Brad Green",
           duration: 2,
           level: "Advanced",
@@ -199,7 +232,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 5,
-          name: "Basics of Angular 4",
+          title: "Basics of Angular 4",
           presenter: "John Papa",
           duration: 2,
           level: "Beginner",
@@ -223,7 +256,7 @@ const EVENTS:EventBase[] = [{
       itenary: [
         {
           id: 1,
-          name: "Testing Angular 4 Workshop",
+          title: "Testing Angular 4 Workshop",
           presenter: "Pascal Precht & Christoph Bergdorf",
           duration: 4,
           level: "Beginner",
@@ -235,7 +268,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 2,
-          name: "Angular 4 and Firebase",
+          title: "Angular 4 and Firebase",
           presenter: "David East",
           duration: 3,
           level: "Intermediate",
@@ -245,7 +278,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 3,
-          name: "Reading the Angular 4 Source",
+          title: "Reading the Angular 4 Source",
           presenter: "Patrick Stapleton",
           duration: 2,
           level: "Intermediate",
@@ -256,7 +289,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 4,
-          name: "Hail to the Lukas",
+          title: "Hail to the Lukas",
           presenter: "Lukas Ruebbelke",
           duration: 1,
           level: "Beginner",
@@ -285,7 +318,7 @@ const EVENTS:EventBase[] = [{
       itenary: [
         {
           id: 1,
-          name: "How Elm Powers Angular 4",
+          title: "How Elm Powers Angular 4",
           presenter: "Murphy Randle",
           duration: 2,
           level: "Intermediate",
@@ -297,7 +330,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 2,
-          name: "Angular and React together",
+          title : "Angular and React together",
           presenter: "Jamison Dance",
           duration: 2,
           level: "Intermediate",
@@ -307,7 +340,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 3,
-          name: "Redux Woes",
+          title : "Redux Woes",
           presenter: "Rob Wormald",
           duration: 1,
           level: "Intermediate",
@@ -319,7 +352,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 4,
-          name: "ng-wat again!!",
+          title: "ng-wat again!!",
           presenter: "Shai Reznik",
           duration: 1,
           level: "Beginner",
@@ -329,7 +362,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 5,
-          name: "Dressed for Success",
+          title: "Dressed for Success",
           presenter: "Ward Bell",
           duration: 2,
           level: "Beginner",
@@ -341,7 +374,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 6,
-          name: "These aren't the directives you're looking for",
+          title: "These aren't the directives you're looking for",
           presenter: "John Papa",
           duration: 2,
           level: "Intermediate",
@@ -369,7 +402,7 @@ const EVENTS:EventBase[] = [{
       itenary: [
         {
           id: 1,
-          name: "Diversity in Tech",
+          title: "Diversity in Tech",
           presenter: "Sir Dave Smith",
           duration: 2,
           level: "Beginner",
@@ -381,7 +414,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 2,
-          name: "World Peace and Angular",
+          title: "World Peace and Angular",
           presenter: "US Secretary of State Zach Galifianakis",
           duration: 2,
           level: "Beginner",
@@ -392,7 +425,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 3,
-          name: "Using Angular with Androids",
+          title: "Using Angular with Androids",
           presenter: "Dan Wahlin",
           duration: 3,
           level: "Advanced",
@@ -420,7 +453,7 @@ const EVENTS:EventBase[] = [{
       itenary: [
         {
           id: 1,
-          name: "Gambling with Angular",
+          title: "Gambling with Angular",
           presenter: "John Papa",
           duration: 1,
           level: "Intermediate",
@@ -433,7 +466,7 @@ const EVENTS:EventBase[] = [{
         },
         {
           id: 2,
-          name: "Angular 4 in 60ish Minutes",
+          title: "Angular 4 in 60ish Minutes",
           presenter: "Dan Wahlin",
           duration: 2,
           level: "Beginner",
