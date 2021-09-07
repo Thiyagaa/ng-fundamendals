@@ -32,10 +32,13 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUser(values:any){
-    if(this.profileForm.valid){
-      this.authService.updateUser(values)
-      this.toastr.success("Updated the profile successfully")
-      this.router.navigate(['/events'])
+    if(this.profileForm.valid && this.authService.isAuthenticated()){
+      this.authService.updateUser(values).subscribe(
+        ()=>{
+          this.toastr.success("Updated the profile successfully")
+          this.router.navigate(['/events'])
+        }
+      )
     } 
   }
 
@@ -49,5 +52,10 @@ export class ProfileComponent implements OnInit {
         return false;
     }
   }
-
+  
+  logout(){
+    this.authService.logout().subscribe(()=>{
+      this.router.navigate(['/user/login']);
+    })
+  }
 }

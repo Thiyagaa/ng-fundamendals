@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../service/event.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { SessionBase } from '../model/event-base';
+import { EventBase, SessionBase } from '../model/event-base';
 
 @Component({
   selector: 'app-event-details',
@@ -22,9 +22,12 @@ export class EventDetailsComponent implements OnInit {
   ngOnInit(): void {
     //+ will cast the string to number
     //this.event = this.eventService.getEvent(+this.route.snapshot.params['id'])
-    this.route.params.forEach( (params:Params) => {
-      this.event = this.eventService.getEvent(+params['id']);
-      this.addMode = false;
+    this.route.data.forEach( (data) => {
+      //this.event = this.eventService.getEvent(+params['id']);
+      //this.eventService.getEvent(+params['id']).subscribe((event:EventBase)=> {
+        this.event = data['event'];
+        this.addMode = false;
+      //})
     })
   }
 

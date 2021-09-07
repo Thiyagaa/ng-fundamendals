@@ -1,6 +1,7 @@
 /// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from "@angular/common/http"
 
 import { AppComponent } from './app.component';
 import { EventListComponent } from './event-list/event-list.component';
@@ -12,7 +13,7 @@ import { EventDetailsComponent } from './event-details/event-details.component';
 import { AppRoutingModule } from './routing.module';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { NotfoundComponent } from './errors/notfound/notfound.component';
-import { EventRouteActivator } from './service/event-route-activator.service';
+//import { EventRouteActivator } from './service/event-route-activator.service';
 import { EventListResolverService } from './service/event-list-resolver.service';
 import { UserModule } from './user/user.module';
 import { AuthService } from './user/auth.service';
@@ -26,6 +27,10 @@ import { DurationPipe } from './common/duration.pipe';
 import { SimpleModalComponent } from './common/simple-modal/simple-modal.component';
 import { JQUERY_TOKEN } from './service/jquery.service.service';
 import { ModalTriggerDirective } from './common/directive/modal.trigger.directive';
+import { UpvoteComponent } from './session/upvote/upvote.component';
+import { VoterService } from './service/voter.service';
+import { LocationValidationDirective } from './create-event/location-validation.directive';
+import { EventresolverService } from './event/eventresolver.service';
 
 let $: JQueryStatic = (window as any)["jQuery"];
 let toastr: Toastr = (window as any)["toastr"];
@@ -46,7 +51,9 @@ let toastr: Toastr = (window as any)["toastr"];
     CollapsableWellComponent,
     DurationPipe,
     SimpleModalComponent,
-    ModalTriggerDirective
+    ModalTriggerDirective,
+    UpvoteComponent,
+    LocationValidationDirective
   ],
   imports: [
     BrowserModule,
@@ -55,12 +62,14 @@ let toastr: Toastr = (window as any)["toastr"];
     FormsModule,
     ReactiveFormsModule,
     DatepickerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [
     EventService,
     {provide: TOASTR_TOKEN,useValue:toastr},
-    EventRouteActivator,  // ==> same as {provide:EventRouteActivator, useClass:EventRouteActivator},
+    EventresolverService,
+    //EventRouteActivator,  // ==> same as {provide:EventRouteActivator, useClass:EventRouteActivator},
     {provide: 'canDeactivateCreateEvent',useValue : checkDirtyState},
 /*  
     use existing needs the value to be defined separately..
@@ -88,6 +97,7 @@ let toastr: Toastr = (window as any)["toastr"];
     EventListResolverService,
     AuthService,
     {provide: JQUERY_TOKEN,useValue:$},
+    VoterService
   ],
   bootstrap: [AppComponent]
 })

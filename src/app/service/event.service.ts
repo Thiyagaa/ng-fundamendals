@@ -1,45 +1,57 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { EventBase,ISchedule } from '../model/event-base';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { EventBase,ISchedule, SessionBase } from '../model/event-base';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  findSessionsByNameContaining(param: string) {
-      let term:string = param.toLocaleLowerCase();
-      let results:any = []; 
-      EVENTS.forEach(event=> {
-        //console.log("Event "+ event.name)
-        if(event.itenary){
-          //console.log("has sessions "+ event.itenary)
-          let values:any[] = event.itenary;
 
-          let sessionslst = values
-                            .filter((session: any) => { 
-            //                  console.log( "session" + JSON.stringify(session) )
-            //                  console.log( "is true "+ ((session as unknown as ISchedule).title.toLowerCase().indexOf(term) > -1))
-                              return (session as unknown as ISchedule).title.toLowerCase().indexOf(term) > -1
-                            })
-          //console.log("matched sessions "+JSON.stringify(sessionslst))
-          sessionslst = sessionslst.map((session:any) => {
-            session.eventId = event.id;
-            //console.log("Assigining session id")
-            return session;
-          })
-          results = results.concat(sessionslst)
-        }
-      })
-      //console.log(JSON.stringify(results))
-      var searchEmitter = new EventEmitter(true);
+  constructor(private httpClient : HttpClient){
 
-      setTimeout(()=>{
-        searchEmitter.emit(results)
-      },100)
-      
-      return searchEmitter;
   }
-  
+
+  // findSessionsByNameContaining(param: string) {
+  //     let term:string = param.toLocaleLowerCase();
+  //     let results:any = []; 
+  //     EVENTS.forEach(event=> {
+  //       //console.log("Event "+ event.name)
+  //       if(event.itenary){
+  //         //console.log("has sessions "+ event.itenary)
+  //         let values:any[] = event.itenary;
+
+  //         let sessionslst = values
+  //                           .filter((session: any) => { 
+  //           //                  console.log( "session" + JSON.stringify(session) )
+  //           //                  console.log( "is true "+ ((session as unknown as ISchedule).title.toLowerCase().indexOf(term) > -1))
+  //                             return (session as unknown as ISchedule).title.toLowerCase().indexOf(term) > -1
+  //                           })
+  //         //console.log("matched sessions "+JSON.stringify(sessionslst))
+  //         sessionslst = sessionslst.map((session:any) => {
+  //           session.eventId = event.id;
+  //           //console.log("Assigining session id")
+  //           return session;
+  //         })
+  //         results = results.concat(sessionslst)
+  //       }
+  //     })
+  //     //console.log(JSON.stringify(results))
+  //     var searchEmitter = new EventEmitter(true);
+
+  //     setTimeout(()=>{
+  //       searchEmitter.emit(results)
+  //     },100)
+      
+  //     return searchEmitter;
+  // }
+  findSessionsByNameContaining(param: string):Observable<SessionBase[]> {
+    console.log("Param : "+param)
+    return this.httpClient.get<SessionBase[]>('/api/sessions/search?search='+param)
+        .pipe(catchError(this.handleError<SessionBase[]>('findSessionsByNameContaining',[])))
+
+  }
   
   updateEvent(event: EventBase) {
 
@@ -50,28 +62,58 @@ export class EventService {
 
   }
 
-  
-  constructor() { }
+  addSession(event: EventBase):Observable<EventBase>{
+    
+  //   // let subject = new Subject<EventBase[]>()
+  //   // setTimeout(()=> {subject.next(EVENTS);subject.complete();},2000)
+  //   // return subject
+  let options = {headers: new HttpHeaders({"Content-Type":"application/json"})};
+  return this.httpClient.post<EventBase>('/api/events',event,options)
+        .pipe(catchError(this.handleError<EventBase>('saveEvent')))
+  //   //return of(EVENTS).pipe(delay(2000));
+    
+   }
+
+
+  private handleError<T>(operation = 'operation',result?:T ){
+      return (error:any) : Observable<T> => {
+        console.error(error)
+        return of(result as T)
+      }
+  }
+
 
   getEvents():Observable<EventBase[]>{
     
-    let subject = new Subject<EventBase[]>()
-    setTimeout(()=> {subject.next(EVENTS);subject.complete();},2000)
-    return subject
+    // let subject = new Subject<EventBase[]>()
+    // setTimeout(()=> {subject.next(EVENTS);subject.complete();},2000)
+    // return subject
+    return this.httpClient.get<EventBase[]>('/api/events')
+        .pipe(catchError(this.handleError<EventBase[]>('getEvents',[])))
     
     //return of(EVENTS).pipe(delay(2000));
     
   }
 
-  getEvent(id: number) : EventBase{
-    return<EventBase> EVENTS.find(m=> m.id === id)
+  // //returns the local static data;
+  // getEvent(id: number) : EventBase{
+  //   return<EventBase> EVENTS.find(m=> m.id === id)
+  // }
+  getEvent(id: number) : Observable<EventBase>{
+    return this.httpClient.get<EventBase>('/api/events/'+id)
+        .pipe(catchError(this.handleError<EventBase>('getEvent')))
   }
 
-  addNewEvent(values: EventBase) {
-    values.id = EVENTS.length+1;
-    EVENTS.push(values)
+  // locally saves the data
+  // addNewEvent(values: EventBase) {
+  //   values.id = EVENTS.length+1;
+  //   EVENTS.push(values)
+  // }
+  addNewEvent(event: EventBase):Observable<EventBase> {
+    let options = {headers: new HttpHeaders({"Content-Type":"application/json"})};
+    return this.httpClient.post<EventBase>('/api/events',event,options)
+        .pipe(catchError(this.handleError<EventBase>('saveEvent')))
   }
-
 
 }
 

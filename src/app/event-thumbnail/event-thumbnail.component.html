@@ -1,7 +1,7 @@
 <div [routerLink]="['/events',event.id]" class="well hoverwell thumbnail event-thumbnail shadow-sm align-items-center">
     <h2>{{event?.name | uppercase}}</h2>
     <div *ngIf="event?.subject">Subject : {{event?.subject}} </div>
-    <div>Date : {{event?.date |  date:'shortDate' }} </div>
+    <div>Date : {{event?.dateTime |  date:'shortDate' }} </div>
     <div>Time : {{event?.time}} </div>
     <div>Price: {{event?.price | currency:'USD'}} </div>
     <div *ngIf="event?.location">

@@ -9,7 +9,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div><strong>Date:</strong> {{event?.date | date:'shortDate'}}</div>
+      <div><strong>Date:</strong> {{event?.dateTime | date:'shortDate'}}</div>
       <div><strong>Time:</strong> {{event?.time}}</div>
       <div><strong>Price:</strong> {{event?.price | currency:'USD'}}</div>
     </div>
@@ -42,6 +42,6 @@
     </div>
 
   </div>
-  <app-session-list [filterBy]="filterBy" [sortBy]="sortBy" *ngIf="!isAddMode()" [sessions]="event?.itenary"></app-session-list>
+  <app-session-list [eventId]="event?.id" [filterBy]="filterBy" [sortBy]="sortBy" *ngIf="!isAddMode()" [sessions]="event?.itenary"></app-session-list>
   <app-create-session *ngIf="isAddMode()" (saveEmitter)="saveNewSession($event)" (cancelEmitter)="cancelSessionSave($event)" ></app-create-session>
 </div>

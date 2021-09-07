@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 /* REFER : https://www.techiediaries.com/angular-bootstrap/ */
 
+/*
+Integrating fontawesome and angular https://stackoverflow.com/questions/38796541/how-to-add-font-awesome-to-angular-2-cli-project
+*/
 body {
     margin-left: 1.5rem;
     margin-right: 1.5rem;

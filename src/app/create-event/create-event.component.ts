@@ -32,38 +32,40 @@ export class CreateEventComponent implements OnInit {
 
   ngOnInit(): void {
     
-    // let eventName = new FormControl('',[Validators.required,Validators.pattern('[A-Za-z0-9].*')])
-    // let date = new FormControl('',[Validators.required])
-    // let time = new FormControl('',[Validators.required])
-    // let subject = new FormControl('',[Validators.required])
-    // let price = new FormControl('',[Validators.required])
-    // let location = new FormControl('',[Validators.required])
-    // let address = new FormControl('',[Validators.required])
-    // let city = new FormControl('',[Validators.required])
-    // let country = new FormControl('',[Validators.required])
-    // let province = new FormControl('',[Validators.required])
-    // let eventType = new FormControl('',[Validators.required])
-    // let difficulty = new FormControl('',[Validators.required])
-    // let onlineUrl = new FormControl('',[Validators.required])
-    // let imageUrl = new FormControl('',[Validators.required])
+     let eventName = new FormControl('',[Validators.required,Validators.pattern('[A-Za-z0-9].*')])
+     let date = new FormControl('',[Validators.required])
+     let time = new FormControl('',[Validators.required])
+     let dateTime = new FormControl('')
+     let subject = new FormControl('',[Validators.required])
+     let price = new FormControl('',[Validators.required])
+     let location = new FormControl('')
+     let address = new FormControl('')
+     let city = new FormControl('')
+     let country = new FormControl('')
+     let province = new FormControl('')
+     let eventType = new FormControl('',[Validators.required])
+     let difficulty = new FormControl('',[Validators.required])
+     let onlineUrl = new FormControl('')
+     let imageUrl = new FormControl('',[Validators.required])
 
 
-    // this.newEventForm = new FormGroup({
-    //     name:eventName,
-    //     date:date,
-    //     time:time,
-    //     subject:subject,
-    //     price:price,
-    //     location:location,
-    //     address:address,
-    //     city:city,
-    //     country:country,
-    //     province:province,
-    //     eventType:eventType,
-    //     difficulty:difficulty,
-    //     onlineUrl:onlineUrl,
-    //     imageUrl:imageUrl
-    // })
+     this.newEventForm = new FormGroup({
+         name:eventName,
+         dateTime:dateTime,
+         date:date,
+         time:time,
+         subject:subject,
+         price:price,
+         location:location,
+         address:address,
+         city:city,
+         country:country,
+         province:province,
+         eventType:eventType,
+         difficulty:difficulty,
+         onlineUrl:onlineUrl,
+         imageUrl:imageUrl
+     })
   
   }
 
@@ -74,10 +76,16 @@ export class CreateEventComponent implements OnInit {
   }
 
   createEvent(values:any){
+    console.log(this.newEventForm.valid)
     console.log(values)
-    this.eventService.addNewEvent(values)
-    this.isDirty = false
-    this.router.navigate(['/events'])
+    this.eventService.addNewEvent(values).subscribe(() => {
+      this.isDirty = false;
+      this.router.navigate(['/events']);
+    })
+    }
+  onlineUrlValidation(){
+    console.log("Validation")
+    this.newEventForm.controls.address.updateValueAndValidity()
   }
 
 }

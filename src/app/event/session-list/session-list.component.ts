@@ -1,6 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { SessionBase } from 'src/app/model/event-base';
 import { faFireAlt } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/user/auth.service';
+import { VoterService } from 'src/app/service/voter.service';
 
 @Component({
   selector: 'app-session-list',
@@ -12,9 +14,10 @@ export class SessionListComponent implements OnInit,OnChanges {
   @Input() sessions!:SessionBase[];
   @Input() filterBy!:string;
   @Input() sortBy!: string;
+  @Input() eventId!: number;
 
   visibleSessions:SessionBase[] = [];
-  constructor() { }
+  constructor(private auth:AuthService,private voterService:VoterService) { }
   ngOnChanges(): void {
     if(this.sessions){
       this.filterSessions(this.filterBy)
@@ -59,4 +62,17 @@ export class SessionListComponent implements OnInit,OnChanges {
   }
   faFire = faFireAlt;
 
+  toggleVote(session: any){
+    if(session.voters && this.userHasVoted(session)){
+      this.voterService.deleteVoter(this.eventId,session,this.auth.loggedOnUser?.userName)
+    }else{
+      this.voterService.addVoter(this.eventId,session,this.auth.loggedOnUser?.userName)
+    }
+  }
+
+  userHasVoted(session: any) {
+    return this.voterService.userHasVoted(session,this.auth.loggedOnUser?.userName)
+  }
 }
+
+
