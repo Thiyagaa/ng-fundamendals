@@ -37,7 +37,6 @@ export class AuthService {
       return this.httpClient.post('/api/login',loginInfo,options)
       .pipe(tap(data=>{
             this.loggedOnUser = <UserBase>(<{[key:string]:any}>data)['user'];
-          //console.log(this.loggedOnUser)
             this.loggedOnUser.lastName = "LastName";
             this.loggedOnUser.firstName = this.loggedOnUser.userName;
             console.log(this.loggedOnUser)
@@ -60,7 +59,7 @@ export class AuthService {
   }
 
   isAuthenticated(){
-    return !!this.loggedOnUser
+    return !!this.loggedOnUser.id
   }
 
   updateUser(values: { lastName: string; firstName: string; }):Observable<any>{

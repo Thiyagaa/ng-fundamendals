@@ -46,7 +46,8 @@ export class CreateSessionComponent implements OnInit {
       duration : +values.duration,
       level : values.level,
       title : values.name,
-      presenter: values.presenter
+      presenter: values.presenter,
+      voters: []
     }
     
     console.log("in save session")

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EventListComponent } from './event-list/event-list.component';
-import { EventDetailsComponent } from './event-details/event-details.component';
-import { CreateEventComponent } from './create-event/create-event.component';
+import { EventListComponent } from './event/event-list/event-list.component';
+import { EventDetailsComponent } from './event/event-details/event-details.component';
 import { NotfoundComponent } from './errors/notfound/notfound.component';
 //import { EventRouteActivator } from './service/event-route-activator.service';
 import { EventListResolverService } from './service/event-list-resolver.service';
-import { CreateSessionComponent } from './event/create-session/create-session.component';
+import { CreateSessionComponent } from './session/create-session/create-session.component';
 import { EventresolverService } from './event/eventresolver.service';
+import { CreateEventComponent } from './event/create-event/create-event.component';
 
 export const appRoutes: Routes = [
   { path: 'events', component: EventListComponent,resolve:{ events : EventListResolverService} },

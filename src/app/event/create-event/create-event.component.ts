@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatepickerOptions } from 'ng2-datepicker';
-import { EventService } from '../service/event.service';
+import { EventService } from 'src/app/service/event.service';
 
 @Component({
   selector: 'app-create-event',

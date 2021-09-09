@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EventService } from '../service/event.service';
-import { Toastr, TOASTR_TOKEN } from '../service/toastr.service';
+import { EventService } from '../../service/event.service';
+import { Toastr, TOASTR_TOKEN } from '../../service/toastr.service';
 
 @Component({
   templateUrl: './event-list.component.html',

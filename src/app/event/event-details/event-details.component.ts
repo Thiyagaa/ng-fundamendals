@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../service/event.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { EventBase, SessionBase } from '../model/event-base';
+import { EventService } from 'src/app/service/event.service';
+import { EventBase, SessionBase } from '../../model/event-base';
 
 @Component({
   selector: 'app-event-details',
@@ -52,7 +52,7 @@ export class EventDetailsComponent implements OnInit {
     
     this.event.itenary.push(session)
 
-    this.eventService.updateEvent(this.event)
+    this.eventService.addSession(this.event).subscribe()
 
     this.addMode = false
     

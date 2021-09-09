@@ -39,5 +39,5 @@ export interface SessionBase extends ISchedule{
     duration: number,
     level: string,
     abstract: string,
-    voters?: string[]
+    voters: string[]
 }

@@ -4,14 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http"
 
 import { AppComponent } from './app.component';
-import { EventListComponent } from './event-list/event-list.component';
-import { EventThumbnailComponent } from './event-thumbnail/event-thumbnail.component';
+import { EventListComponent } from './event/event-list/event-list.component';
+import { EventThumbnailComponent } from './event/event-thumbnail/event-thumbnail.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { EventService } from './service/event.service';
 import { Toastr, TOASTR_TOKEN } from './service/toastr.service';
-import { EventDetailsComponent } from './event-details/event-details.component';
+import { EventDetailsComponent } from './event/event-details/event-details.component';
 import { AppRoutingModule } from './routing.module';
-import { CreateEventComponent } from './create-event/create-event.component';
+import { CreateEventComponent } from './event/create-event/create-event.component';
 import { NotfoundComponent } from './errors/notfound/notfound.component';
 //import { EventRouteActivator } from './service/event-route-activator.service';
 import { EventListResolverService } from './service/event-list-resolver.service';
@@ -19,8 +19,8 @@ import { UserModule } from './user/user.module';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatepickerModule } from 'ng2-datepicker';
-import { CreateSessionComponent } from './event/create-session/create-session.component';
-import { SessionListComponent } from './event/session-list/session-list.component';
+import { CreateSessionComponent } from './session/create-session/create-session.component';
+import { SessionListComponent } from './session/session-list/session-list.component';
 import { CollapsableWellComponent } from './common/collapsable-well/collapsable-well.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DurationPipe } from './common/duration.pipe';
@@ -29,7 +29,7 @@ import { JQUERY_TOKEN } from './service/jquery.service.service';
 import { ModalTriggerDirective } from './common/directive/modal.trigger.directive';
 import { UpvoteComponent } from './session/upvote/upvote.component';
 import { VoterService } from './service/voter.service';
-import { LocationValidationDirective } from './create-event/location-validation.directive';
+import { LocationValidationDirective } from './event/create-event/location-validation.directive';
 import { EventresolverService } from './event/eventresolver.service';
 
 let $: JQueryStatic = (window as any)["jQuery"];
