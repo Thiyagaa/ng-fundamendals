@@ -1,3 +1,3 @@
 import { InjectionToken } from '@angular/core';
 
-export const JQUERY_TOKEN =new InjectionToken<Object>('jQuery'); 
+export const JQUERY_TOKEN =new InjectionToken<JQuery>('jQuery'); 

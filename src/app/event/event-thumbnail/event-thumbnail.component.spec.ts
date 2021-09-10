@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EventThumbnailComponent } from './event-thumbnail.component';
+// import { EventThumbnailComponent } from './event-thumbnail.component';
 
 // describe('EventThumbnailComponent', () => {
 //   let component: EventThumbnailComponent;

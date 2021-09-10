@@ -2,7 +2,7 @@ import { AbstractControl } from '@angular/forms';
 
 export function restrictedWords(words:string[]){
     
-	return (control :AbstractControl):{[key:string]:any}|null => {
+	return (control :AbstractControl):{[key:string]:unknown}|null => {
 
 		if(!words) return null;
 

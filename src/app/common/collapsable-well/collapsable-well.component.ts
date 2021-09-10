@@ -1,23 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
 	selector: 'app-collapsable-well',
 	templateUrl: './collapsable-well.component.html',
 	styleUrls: ['./collapsable-well.component.css']
 })
-export class CollapsableWellComponent implements OnInit {
+export class CollapsableWellComponent {
 
-  @Input() title!: string;
-  
-  visible = true;
+	@Input() title='';
+	
+	visible = true;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  toggleContent(){
-  	this.visible = !this.visible;
-  }
+	toggleContent():void{
+		this.visible = !this.visible;
+	}
 
 }

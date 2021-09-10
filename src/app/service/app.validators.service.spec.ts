@@ -1,5 +1,4 @@
-import { TestBed } from '@angular/core/testing';
-import { AbstractControl, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { restrictedWords } from './app.validators.service';
 

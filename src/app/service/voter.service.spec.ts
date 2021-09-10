@@ -1,6 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TestBed } from '@angular/core/testing';
-import { of,Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { SessionBase } from '../model/event-base';
 
 import { VoterService } from './voter.service';

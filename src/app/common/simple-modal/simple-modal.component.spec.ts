@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SimpleModalComponent } from './simple-modal.component';
+// import { SimpleModalComponent } from './simple-modal.component';
 
 // describe('SimpleModalComponent', () => {
 //   let component: SimpleModalComponent;

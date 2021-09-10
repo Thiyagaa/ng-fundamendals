@@ -7,8 +7,6 @@ import {  NG_VALIDATORS, FormGroup, ValidationErrors, Validator } from '@angular
 })
 export class LocationValidationDirective implements Validator  {
 
-	constructor() { }
-
 	validate(control: FormGroup): ValidationErrors | null {
 		const addressControl = control.controls['address'];
 		const cityControl = control.controls['city'];

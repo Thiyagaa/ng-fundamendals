@@ -11,51 +11,51 @@ import { AuthService } from '../auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  //REFER : https://stackoverflow.com/questions/66563535/type-formgroup-null-is-not-assignable-to-type-formgroup-type-null-is-no
-  profileForm!: FormGroup; 
-  firstName!: FormControl
-  lastName!: FormControl
-  
-  constructor(private router: Router,private authService:AuthService,@Inject(TOASTR_TOKEN) private toastr:Toastr) { }
+	//REFER : https://stackoverflow.com/questions/66563535/type-formgroup-null-is-not-assignable-to-type-formgroup-type-null-is-no
+	profileForm!: FormGroup; 
+	firstName!: FormControl
+	lastName!: FormControl
 
-  ngOnInit(): void {
-  	this.firstName = new FormControl(this.authService.loggedOnUser?.firstName,[Validators.required,Validators.pattern('[A-Za-z0-9].*')]);
-  	this.lastName = new FormControl(this.authService.loggedOnUser?.lastName,[Validators.required,Validators.pattern('[A-Za-z0-9].*')]);
-  	this.profileForm = new FormGroup({
-  		firstName:this.firstName,
-  		lastName:this.lastName
-  	});
-  }
+	constructor(private router: Router,private authService:AuthService,@Inject(TOASTR_TOKEN) private toastr:Toastr) { }
 
-  cancel(){
-  	this.router.navigate(['/events']);
-  }
+	ngOnInit(): void {
+		this.firstName = new FormControl(this.authService.loggedOnUser?.firstName,[Validators.required,Validators.pattern('[A-Za-z0-9].*')]);
+		this.lastName = new FormControl(this.authService.loggedOnUser?.lastName,[Validators.required,Validators.pattern('[A-Za-z0-9].*')]);
+		this.profileForm = new FormGroup({
+			firstName:this.firstName,
+			lastName:this.lastName
+		});
+	}
 
-  updateUser(values:any){
-  	if(this.profileForm.valid && this.authService.isAuthenticated()){
-  		this.authService.updateUser(values).subscribe(
-  			()=>{
-  				this.toastr.success('Updated the profile successfully');
-  				this.router.navigate(['/events']);
-  			}
-  		);
-  	} 
-  }
+	cancel():void{
+		this.router.navigate(['/events']);
+	}
 
-  validate(value : string){
-  	switch(value){
-  	case 'firstName':
-  		return this.firstName.untouched || this.firstName.valid;
-  	case 'lastName':
-  		return this.lastName.untouched || this.lastName.valid;
-  	default:
-  		return false;
-  	}
-  }
-  
-  logout(){
-  	this.authService.logout().subscribe(()=>{
-  		this.router.navigate(['/user/login']);
-  	});
-  }
+	updateUser(values: { lastName: string; firstName: string; }):void{
+		if(this.profileForm.valid && this.authService.isAuthenticated()){
+			this.authService.updateUser(values).subscribe(
+				()=>{
+					this.toastr.success('Updated the profile successfully');
+					this.router.navigate(['/events']);
+				}
+			);
+		} 
+	}
+
+	validate(value : string):boolean{
+		switch(value){
+		case 'firstName':
+			return this.firstName.untouched || this.firstName.valid;
+		case 'lastName':
+			return this.lastName.untouched || this.lastName.valid;
+		default:
+			return false;
+		}
+	}
+
+	logout():void{
+		this.authService.logout().subscribe(()=>{
+			this.router.navigate(['/user/login']);
+		});
+	}
 }

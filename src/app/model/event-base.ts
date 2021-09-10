@@ -3,6 +3,7 @@ export interface EventBase {
     name:string,
     subject?:string,
     date : Date,
+    dateTime ?: Date,
     time : string,
     price : number,
     imageUrl?: string,
@@ -12,7 +13,7 @@ export interface EventBase {
         country : string,
         province : string
     },
-    itenary? : ItenaryBase[]|SessionBase[]
+    itenary? : SessionBase[]
     onlineUrl? : string,
     eventType : string,
     difficulty?: string
@@ -25,19 +26,18 @@ export  interface ISchedule{
     title: string
 }
 
-export interface ItenaryBase extends ISchedule{
-    planed: string[],
-    destination: string,
-    source: string,
-    images: string[],
-    transportMode: string
-    distance:number
-}
+
 
 export interface SessionBase extends ISchedule{
     presenter: string,
     duration: number,
     level: string,
     abstract: string,
-    voters: string[]
+    voters: string[],
+    planed?: string[],
+    destination?: string,
+    source?: string,
+    images?: string[],
+    transportMode?: string
+    distance?:number
 }

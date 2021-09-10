@@ -8,13 +8,13 @@ import { UserBase } from '../model/user-base';
 	providedIn: 'root'
 })
 export class AuthService {
-	logout() {
+	logout():Observable<unknown> {
 		this.loggedOnUser = {} as unknown as UserBase;
 
 		const options = {headers: new HttpHeaders({'Content-Type':'application/json'})};
 		return this.httpClient.post('/api/logout',{},options);
 	}
-	checkAuthenticationStatus() {
+	checkAuthenticationStatus(): void {
 		this.httpClient.get('/api/currentIdentity').pipe(
 			tap(
 				data => {
@@ -27,46 +27,47 @@ export class AuthService {
 		).subscribe();
 	}
 
-  loggedOnUser:UserBase = {} as unknown as UserBase;
+	loggedOnUser:UserBase = {} as unknown as UserBase;
 
-  constructor(private httpClient:HttpClient) { }
+	constructor(private httpClient:HttpClient) { }
 
-  loginUser(userName:string,password:string):Observable<any>{
-  	const loginInfo = {username: userName, password: password};
-  	const options = {headers: new HttpHeaders({'Content-Type':'application/json'})};
-  	return this.httpClient.post('/api/login',loginInfo,options)
-  		.pipe(tap(data=>{
-  			this.loggedOnUser = <UserBase>(<{[key:string]:any}>data)['user'];
-  			this.loggedOnUser.lastName = 'LastName';
-  			this.loggedOnUser.firstName = this.loggedOnUser.userName;
-  			console.log(this.loggedOnUser);
-  		}))
-  		.pipe(catchError(this.handleError<{[key:string]:any}>('login')));
-      
-  	// this.loggedOnUser= {
-  	//   id:1,
-  	//   firstName:"Thiyagarajan",
-  	//   lastName:"Annamalai",
-  	//   username:"Thiyagaa",
-  	//   password: ''
-  	// }
-  }
-  private handleError<T>(operation = 'operation',result?:T ){
-  	return (error:any) : Observable<T> => {
-  		console.error(error);
-  		return of(error as T);
-  	};
-  }
+	loginUser(userName:string,password:string):Observable<unknown>{
+		const loginInfo = {username: userName, password: password};
+		const options = {headers: new HttpHeaders({'Content-Type':'application/json'})};
+		return this.httpClient.post('/api/login',loginInfo,options)
+			.pipe(tap(data=>{
+				this.loggedOnUser = <UserBase>(<{[key:string]:unknown}>data)['user'];
+				this.loggedOnUser.lastName = 'LastName';
+				this.loggedOnUser.firstName = this.loggedOnUser.userName;
+				console.log(this.loggedOnUser);
+			}))
+			.pipe(catchError(this.handleError<{[key:string]:unknown}>('login')));
+			
+		// this.loggedOnUser= {
+		//	 id:1,
+		//	 firstName:"Thiyagarajan",
+		//	 lastName:"Annamalai",
+		//	 username:"Thiyagaa",
+		//	 password: ''
+		// }
+	}
+	private handleError<T>(operation = 'operation',result?:T ){
+		console.log('Exception occrred '+ operation+ ' response ' + result);
+		return (error:unknown) : Observable<T> => {
+			console.error(error);
+			return of(error as T);
+		};
+	}
 
-  isAuthenticated(){
-  	return !!this.loggedOnUser.id;
-  }
+	isAuthenticated():boolean{
+		return !!this.loggedOnUser.id;
+	}
 
-  updateUser(values: { lastName: string; firstName: string; }):Observable<any>{
-  	this.loggedOnUser.firstName = values.firstName;
-  	this.loggedOnUser.lastName = values.lastName;
-  	const options = {headers: new HttpHeaders({'Content-Type':'application/json'})};
-  	return this.httpClient.put(`/api/users/${this.loggedOnUser.id}`,this.loggedOnUser,options)
-  		.pipe(catchError(this.handleError('updateUser')));
-  }
+	updateUser(values: { lastName: string; firstName: string; }):Observable<unknown>{
+		this.loggedOnUser.firstName = values.firstName;
+		this.loggedOnUser.lastName = values.lastName;
+		const options = {headers: new HttpHeaders({'Content-Type':'application/json'})};
+		return this.httpClient.put(`/api/users/${this.loggedOnUser.id}`,this.loggedOnUser,options)
+			.pipe(catchError(this.handleError('updateUser')));
+	}
 }

@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
-
-import { EventListResolverService } from './event-list-resolver.service';
+// import { TestBed } from '@angular/core/testing';
+    
+// import { EventListResolverService } from './event-list-resolver.service';
 
 // describe('EventListResolverService', () => {
 //   let service: EventListResolverService;

@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { EventRouteActivator } from './event-route-activator.service';
+// import { EventRouteActivator } from './event-route-activator.service';
 
 // describe('EventRouteActivatorService', () => {
 //   let service: EventRouteActivator;

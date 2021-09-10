@@ -13,7 +13,7 @@
         <span> Online Url : {{event?.onlineUrl}}</span>
     </div>
     <div *ngIf="event?.eventType">
-        <div [ngSwitch]="event?.eventType">
+        <div [ngSwitch]="event.eventType">
             <span>Category : </span>
             <span [class.adventure]="event?.eventType === 'Adventure'" *ngSwitchCase="'Adventure'">ADVENTURE</span>
             <span [ngClass]="{educational:event?.eventType === 'Educational',bold:event?.eventType === 'Educational'}" *ngSwitchCase="'Educational'">EDUCATIONAL</span>

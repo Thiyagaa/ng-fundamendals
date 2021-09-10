@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { EventBase,ISchedule, SessionBase } from '../model/event-base';
+import { EventBase,SessionBase } from '../model/event-base';
 
 @Injectable({
 	providedIn: 'root'
@@ -53,14 +53,14 @@ export class EventService {
 
 	}
   
-	updateEvent(event: EventBase) {
+	// updateEvent(event: EventBase) {
 
-		const index = EVENTS.findIndex(e => e.id = event.id);
+	// 	const index = EVENTS.findIndex(e => e.id = event.id);
     
-		EVENTS[index] = event;
-		console.log('Update event');
+	// 	EVENTS[index] = event;
+	// 	console.log('Update event');
 
-	}
+	// }
 
 	addSession(event: EventBase):Observable<EventBase>{
     
@@ -76,7 +76,7 @@ export class EventService {
 
 
 	private handleError<T>(operation = 'operation',result?:T ){
-		return (error:any) : Observable<T> => {
+		return (error:unknown) : Observable<T> => {
 			console.error(error);
 			return of(result as T);
 		};
@@ -117,6 +117,7 @@ export class EventService {
 
 }
 
+/*
 const EVENTS:EventBase[] = [{
 	'id': 1,
 	'name' : 'Leh-Ladak Bike trip',
@@ -520,3 +521,4 @@ const EVENTS:EventBase[] = [{
 	]
 }
 ];
+*/

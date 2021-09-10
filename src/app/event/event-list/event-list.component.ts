@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EventBase } from 'src/app/model/event-base';
 import { EventService } from '../../service/event.service';
 import { Toastr, TOASTR_TOKEN } from '../../service/toastr.service';
 
@@ -10,25 +11,25 @@ import { Toastr, TOASTR_TOKEN } from '../../service/toastr.service';
 export class EventListComponent implements OnInit {
 
 	constructor(private eventService:EventService,@Inject(TOASTR_TOKEN) private toastr:Toastr,private route:ActivatedRoute) { }
-  @Input() eventlist:any
-  ngOnInit(): void {
-    
-  	this.eventlist= this.route.snapshot.data['events'];
-  	// this below line is not needed as we have the resolver taking care of this issue 
-  	//this.eventService.getEvents().subscribe(events => {this.eventlist = events});
-  	//console.log(JSON.stringify(this.eventlist))
-  }
-  
-  handleEventClickEvent(eventName:string){
-  	this.toastr.success(eventName);
-  }
+	@Input() eventlist: EventBase[] = [];
+	ngOnInit(): void {
+		
+		this.eventlist= this.route.snapshot.data['events'];
+		// this below line is not needed as we have the resolver taking care of this issue 
+		//this.eventService.getEvents().subscribe(events => {this.eventlist = events});
+		//console.log(JSON.stringify(this.eventlist))
+	}
+	
+	handleEventClickEvent(eventName:string):void{
+		this.toastr.success(eventName);
+	}
 
 /*
 
-  //passing data between components
-  
-  handleChildClick (data: any){
-      console.log("Received "+data)
-  }
-*/  
+	//passing data between components
+	
+	handleChildClick (data: any){
+			console.log("Received "+data)
+	}
+*/	
 }

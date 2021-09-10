@@ -1,4 +1,4 @@
-/// <reference path="../../node_modules/@types/jquery/index.d.ts" />
+//// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,8 +32,8 @@ import { VoterService } from './service/voter.service';
 import { LocationValidationDirective } from './event/create-event/location-validation.directive';
 import { EventresolverService } from './event/eventresolver.service';
 
-const $: JQueryStatic = (window as any)['jQuery'];
-const toastr: Toastr = (window as any)['toastr'];
+const $: JQuery = <JQuery>(window as unknown as {[key:string]:unknown})['jQuery'];
+const toastr: Toastr = <Toastr>(window as unknown as {[key:string]:unknown})['toastr'];
 
 //declare let toastr:Toastr;
 
@@ -103,7 +103,7 @@ const toastr: Toastr = (window as any)['toastr'];
 })
 export class AppModule { }
 
-export function checkDirtyState(component : CreateEventComponent){
+export function checkDirtyState(component : CreateEventComponent):boolean{
 	if(component.isDirty){
 		return window.confirm('There are unsaved changes, do you want to proceed?');
 	}

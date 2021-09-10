@@ -1,14 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SessionBase } from 'src/app/model/event-base';
 
+import { SessionBase } from '../../model/event-base';
+import { VoterService } from '../../service/voter.service';
+import { AuthService } from '../../user/auth.service';
 import { SessionListComponent } from './session-list.component';
 
 describe('SessionListComponent isolated test', () => {
 	let component: SessionListComponent;
-	let authServiceMock:any,voterServiceMock:any;  
+	let authServiceMock:unknown,voterServiceMock:unknown;  
 
 	beforeEach(() => {
-		component = new SessionListComponent(authServiceMock,voterServiceMock);
+		component = new SessionListComponent(<AuthService>authServiceMock,<VoterService>voterServiceMock);
 	});
 
 	describe('ngOnChange',()=>{

@@ -8,12 +8,12 @@ import { AuthService } from './user/auth.service';
 })
 export class AppComponent implements OnInit{
 
-  title = 'ng-fundamendals';
-  constructor(private authService:AuthService){
+	title = 'ng-fundamendals';
+	constructor(private authService:AuthService){
 
-  }
-  ngOnInit(): void {
-  	this.authService.checkAuthenticationStatus();
-  }
+	}
+	ngOnInit(): void {
+		this.authService.checkAuthenticationStatus();
+	}
 
 }
