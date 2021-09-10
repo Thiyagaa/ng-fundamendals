@@ -1,25 +1,33 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SessionBase } from 'src/app/model/event-base';
 
 import { SessionListComponent } from './session-list.component';
 
-// describe('SessionListComponent', () => {
-//   let component: SessionListComponent;
-//   let fixture: ComponentFixture<SessionListComponent>;
+describe('SessionListComponent isolated test', () => {
+  let component: SessionListComponent;
+  let authServiceMock:any,voterServiceMock:any;  
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       declarations: [ SessionListComponent ]
-//     })
-//     .compileComponents();
-//   });
+  beforeEach(() => {
+    component = new SessionListComponent(authServiceMock,voterServiceMock);
+  });
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(SessionListComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  describe("ngOnChange",()=>{
+    it('component should filter and sort properly when ngOnChange is invoked', () => {
+        component.sessions = <SessionBase[]>[{title:"Session 2",level:'intermediate'},
+                                             {title:"Session 1",level:'beginner'},
+                                             {title:"Session 3",level:'advanced'},
+                                             {title:"Session 4",level:'intermediate'},
+                                            ]
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+        component.filterBy='intermediate'
+        component.sortBy='name'
+        component.eventId = 3
+
+        component.ngOnChanges();
+        
+        expect(component.visibleSessions.length).toBe(2)
+
+    });
+  });
+
+});
