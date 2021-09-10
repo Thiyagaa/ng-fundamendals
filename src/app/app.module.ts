@@ -1,7 +1,7 @@
 /// <reference path="../../node_modules/@types/jquery/index.d.ts" />
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from "@angular/common/http"
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { EventListComponent } from './event/event-list/event-list.component';
@@ -32,46 +32,46 @@ import { VoterService } from './service/voter.service';
 import { LocationValidationDirective } from './event/create-event/location-validation.directive';
 import { EventresolverService } from './event/eventresolver.service';
 
-let $: JQueryStatic = (window as any)["jQuery"];
-let toastr: Toastr = (window as any)["toastr"];
+const $: JQueryStatic = (window as any)['jQuery'];
+const toastr: Toastr = (window as any)['toastr'];
 
 //declare let toastr:Toastr;
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    EventListComponent,
-    EventThumbnailComponent,
-    NavbarComponent,
-    EventDetailsComponent,
-    CreateEventComponent,
-    NotfoundComponent,
-    CreateSessionComponent,
-    SessionListComponent,
-    CollapsableWellComponent,
-    DurationPipe,
-    SimpleModalComponent,
-    ModalTriggerDirective,
-    UpvoteComponent,
-    LocationValidationDirective
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    UserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    DatepickerModule,
-    FontAwesomeModule,
-    HttpClientModule
-  ],
-  providers: [
-    EventService,
-    {provide: TOASTR_TOKEN,useValue:toastr},
-    EventresolverService,
-    //EventRouteActivator,  // ==> same as {provide:EventRouteActivator, useClass:EventRouteActivator},
-    {provide: 'canDeactivateCreateEvent',useValue : checkDirtyState},
-/*  
+	declarations: [
+		AppComponent,
+		EventListComponent,
+		EventThumbnailComponent,
+		NavbarComponent,
+		EventDetailsComponent,
+		CreateEventComponent,
+		NotfoundComponent,
+		CreateSessionComponent,
+		SessionListComponent,
+		CollapsableWellComponent,
+		DurationPipe,
+		SimpleModalComponent,
+		ModalTriggerDirective,
+		UpvoteComponent,
+		LocationValidationDirective
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		UserModule,
+		FormsModule,
+		ReactiveFormsModule,
+		DatepickerModule,
+		FontAwesomeModule,
+		HttpClientModule
+	],
+	providers: [
+		EventService,
+		{provide: TOASTR_TOKEN,useValue:toastr},
+		EventresolverService,
+		//EventRouteActivator,  // ==> same as {provide:EventRouteActivator, useClass:EventRouteActivator},
+		{provide: 'canDeactivateCreateEvent',useValue : checkDirtyState},
+		/*  
     use existing needs the value to be defined separately..
     
     example : EventRouteActivatorNew is a new implementation and i want to override the instance of EventRouteActivator then i will do {provide: EventRouteActivator,useClass : EventRouteActivatorNew}, this will replace the instance of EventRouteActivator with EventRouteActivatorNew in the mapping.
@@ -94,18 +94,18 @@ let toastr: Toastr = (window as any)["toastr"];
       {provide: EventRouteActivatorNew,useFactory : EventRouteActivatorFunction},
     
     */
-    EventListResolverService,
-    AuthService,
-    {provide: JQUERY_TOKEN,useValue:$},
-    VoterService
-  ],
-  bootstrap: [AppComponent]
+		EventListResolverService,
+		AuthService,
+		{provide: JQUERY_TOKEN,useValue:$},
+		VoterService
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
 
 export function checkDirtyState(component : CreateEventComponent){
-  if(component.isDirty){
-    return window.confirm('There are unsaved changes, do you want to proceed?')
-  }
-  return true;
+	if(component.isDirty){
+		return window.confirm('There are unsaved changes, do you want to proceed?');
+	}
+	return true;
 }

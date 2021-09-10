@@ -5,13 +5,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 
 export const userRoutes: Routes =[
-  { path: 'profile', component: ProfileComponent},
-  { path: 'login', component: LoginComponent},
-]
+	{ path: 'profile', component: ProfileComponent},
+	{ path: 'login', component: LoginComponent},
+];
 
 @NgModule({
-  imports: [CommonModule,RouterModule.forChild(userRoutes)],
-  exports: [RouterModule]
+	imports: [CommonModule,RouterModule.forChild(userRoutes)],
+	exports: [RouterModule]
 })
 export class UserRoutingModule { }
 

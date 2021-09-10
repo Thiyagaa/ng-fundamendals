@@ -5,17 +5,17 @@ import { EventService } from './event.service';
 
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class EventRouteActivator implements CanActivate {
 
-  constructor(private eventService: EventService,private router :Router) { }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    const eventExists = !! this.eventService.getEvent(+route.params['id'])
-    if(!eventExists){
-      this.router.navigate(['/404'])
-    }
-    return eventExists;
-  }
+	constructor(private eventService: EventService,private router :Router) { }
+	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+		const eventExists = !! this.eventService.getEvent(+route.params['id']);
+		if(!eventExists){
+			this.router.navigate(['/404']);
+		}
+		return eventExists;
+	}
   
 }

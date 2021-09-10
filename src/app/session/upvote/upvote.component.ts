@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-upvote',
-  templateUrl: './upvote.component.html',
-  styleUrls: ['./upvote.component.css']
+	selector: 'app-upvote',
+	templateUrl: './upvote.component.html',
+	styleUrls: ['./upvote.component.css']
 })
 export class UpvoteComponent implements OnInit {
   @Input() voted: any;
@@ -18,7 +18,7 @@ export class UpvoteComponent implements OnInit {
   @Input() count: any;
   @Output() vote = new EventEmitter();
   votedHeart:any = faHeart
-  iconColor: string='';
+  iconColor='';
 
   constructor() { }
 
@@ -26,7 +26,7 @@ export class UpvoteComponent implements OnInit {
   }
 
   onClick(){
-    this.vote.emit({})
+  	this.vote.emit({});
   }
 
 }

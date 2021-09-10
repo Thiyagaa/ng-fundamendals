@@ -2,16 +2,16 @@ import { EventEmitter } from '@angular/core';
 import { Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-event-thumbnail',
-  templateUrl: './event-thumbnail.component.html',
-  styleUrls: ['./event-thumbnail.component.css']
+	selector: 'app-event-thumbnail',
+	templateUrl: './event-thumbnail.component.html',
+	styleUrls: ['./event-thumbnail.component.css']
 })
 export class EventThumbnailComponent implements OnInit {
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+	}
   @Input() event:any
 
   /*
@@ -35,21 +35,21 @@ export class EventThumbnailComponent implements OnInit {
   */
 
   getEventTypeStyles(){
-    const isLeisure =  this.event?.eventType === 'Leisure'
-    return {leisure:isLeisure,bold:isLeisure}
+  	const isLeisure =  this.event?.eventType === 'Leisure';
+  	return {leisure:isLeisure,bold:isLeisure};
   }
 
   getEventTypeClassAsString(){
-    if(this.event?.eventType === 'Educational'){
-      return "educational bold"
-    }
-    return ""
+  	if(this.event?.eventType === 'Educational'){
+  		return 'educational bold';
+  	}
+  	return '';
   }
 
   getEventTypeClassAsStringArray(){
-    if(this.event?.eventType === 'Educational'){
-      return ['educational','bold']
-    }
-    return []
+  	if(this.event?.eventType === 'Educational'){
+  		return ['educational','bold'];
+  	}
+  	return [];
   }
 }
