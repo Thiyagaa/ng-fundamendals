@@ -26,7 +26,8 @@ describe('SessionListComponent', () => {
                 {provide :AuthService,useValue: mockAuthService},
                 {provide :VoterService,useValue: mockVoterService}  
             ],
-            schemas: [NO_ERRORS_SCHEMA]
+            schemas: [NO_ERRORS_SCHEMA]// to ignore child components refered in the template.
+        
         });
         fixture = TestBed.createComponent(SessionListComponent);
         component = fixture.componentInstance;
