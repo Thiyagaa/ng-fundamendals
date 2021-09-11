@@ -11,7 +11,7 @@ export class SimpleModalComponent{
 	@Input()	title = ''
 	@Input()	elementId = ''
 	@ViewChild('modalcontainer') containerElement!: ElementRef;
-	constructor(@Inject(JQUERY_TOKEN) private $:any) { }
+	constructor(@Inject(JQUERY_TOKEN) private $:JQueryStatic) { }
 
 	closeModal():void{
 		this.$(this.containerElement.nativeElement).modal('hide');

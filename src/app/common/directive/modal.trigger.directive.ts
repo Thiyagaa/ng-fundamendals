@@ -8,7 +8,7 @@ export class ModalTriggerDirective implements OnInit {
 
 	private el: HTMLElement
 	@Input('app-modal-trigger') modalId = '';
-	constructor( @Inject(JQUERY_TOKEN) private $: any, elemRef : ElementRef )	{
+	constructor( @Inject(JQUERY_TOKEN) private $: JQueryStatic, elemRef : ElementRef )	{
 		console.log('Directive constructor called');
 		this.el = elemRef.nativeElement;
 	}

@@ -77,7 +77,7 @@ export class EventService {
 
 	private handleError<T>(operation = 'operation',result?:T ){
 		return (error:unknown) : Observable<T> => {
-			console.error(error);
+			console.error(operation+' : '+error);
 			return of(result as T);
 		};
 	}

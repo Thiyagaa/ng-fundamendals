@@ -1,25 +1,39 @@
-import { of } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
 import { SessionBase } from '../model/event-base';
 
 import { VoterService } from './voter.service';
+import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('VoterService', () => {
-	let voterService: VoterService,mockHttp: any ;
+	let voterService: VoterService,mockHttp: HttpTestingController ;
   
 	beforeEach(()=>{
-		mockHttp = jasmine.createSpyObj('mockHttp', ['delete','post']);
-		voterService = new VoterService(mockHttp) ;
+		TestBed.configureTestingModule({
+			imports: [ HttpClientTestingModule ],
+			providers: [VoterService]
+		});
+		voterService = TestBed.inject(VoterService);
+		mockHttp = TestBed.inject(HttpTestingController);
+	});
+
+	afterEach(() => {
+		mockHttp.verify();
 	});
 
 	it('Should remove voter from the list',()=>{
 		const session = { id: 6, voters:['user1','user2']};
     
 		const successResponse =  { id: 6, voters:['user2']};
-    
-		mockHttp.delete.and.returnValue(of(successResponse));
 
 		voterService.deleteVoter(3,<SessionBase>session,'user1');
+		
+		const handler = mockHttp.expectOne('/api/events/3/sessions/6/voters/user1'); 
 
+		expect(handler.request.method).toBe('DELETE');
+				
+		handler.flush(successResponse);
+		
+		expect(session.voters.length).toBe(1);
 		expect(session.voters[0]).toEqual('user2');
 	});
 
@@ -37,10 +51,16 @@ describe('VoterService', () => {
 			error: 'Error occured while trying to proxy to: localhost:4200/api/events/9' 
 		};
     
-		mockHttp.delete.and.returnValue(of(failureResponse));
-
 		voterService.deleteVoter(3,<SessionBase>session,'user1');
     
+		const handler = mockHttp.expectOne('/api/events/3/sessions/6/voters/user1'); 
+
+		expect(handler.request.method).toBe('DELETE');
+				
+		handler.flush(failureResponse);
+		
+		expect(session.voters.length).toBe(2);
+
 		expect(session.voters).toEqual(['user1','user2']);
 	});
 
@@ -50,10 +70,14 @@ describe('VoterService', () => {
     
 		const successResponse =  { id: 6, voters:['user1','user2','user3']};
     
-		mockHttp.post.and.returnValue(of(successResponse));
-
 		voterService.addVoter(3,<SessionBase>session,'user3');
 
+		const handler = mockHttp.expectOne('/api/events/3/sessions/6/voters/user3'); 
+
+		expect(handler.request.method).toBe('POST');
+				
+		handler.flush(successResponse);
+		
 		expect(session.voters.length).toBe(3);
 	});
 
@@ -71,11 +95,14 @@ describe('VoterService', () => {
 			error: 'Error occured while trying to proxy to: localhost:4200/api/events/9' 
 		};
     
-		mockHttp.post.and.returnValue(of(failureResponse));
-
 		voterService.addVoter(3,<SessionBase>session,'user1');
-    
-		expect(session.voters.length).toEqual(2);
+
+		const handler = mockHttp.expectOne('/api/events/3/sessions/6/voters/user1'); 
+
+		expect(handler.request.method).toBe('POST');
+				
+		handler.flush(failureResponse);
+		expect(session.voters.length).toBe(2);
 		expect(session.voters).toEqual(['user1','user2']);
 	});
 
